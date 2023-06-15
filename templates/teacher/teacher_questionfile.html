@@ -1,0 +1,54 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    a:link {
+          text-decoration: none;
+        }
+    
+  </style>
+</head>
+<h2 style="text-align:center;">Добавить вопрос</h2>
+<form method="POST" autocomplete="off" style="margin:100px;margin-top: 0px;" enctype="multipart/form-data">
+    {%csrf_token%}
+    <div class="raw">
+      <div class="form-group">
+        <div class="col-md-6 p-2">
+          <label >Курс</label>
+            {{form.course}}
+        </div>
+        <div class="col-md-6 p-2">
+          <label >Заголовок</label>
+            {{form.title}}
+        </div>
+        <div class="col-md-6 p-2">
+          <label >Файл</label>
+            {{form.file}}
+        </div>
+        <div class="col-md-6 p-2">
+          <label >Всего баллов</label>
+            {{form.total_marks}}
+        </div>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div><br><br>
+    <button type="submit" class="btn btn-success pl-2" style="border-radius: 0%; margin-top: 25px; margin-left: 16px;" >Submit Question</button>
+  </form>
+<br><br><br>
+{% endblock content %}

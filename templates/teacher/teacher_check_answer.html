@@ -1,0 +1,53 @@
+{% extends 'teacher/teacherbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+  a:link {
+        text-decoration: none;
+      }
+    
+  </style>
+</head>
+
+<div class="container">
+  <div class="panel panel-primary">
+    <h2 style="text-align:center;">Student Answers</h2>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+
+          <th>Ученик</th>
+          <th>Заголовок</th>
+          <th>Ответ</th>
+          <th>оценки</th>
+
+        </tr>
+      </thead>
+      {% for answer in answers %}
+      <tr>
+        <td> {{answer.student}}</td>
+        <td> {{answer.question_sheet}}</td>
+        <td> <a class="btn btn-success" href="{{answer.answer.url}}" download>Скачать ответ</a></td>
+        <td>
+          <form method="POST" action="{% url 'teacher-set-mark' answer.id %}">
+            {% csrf_token %}
+            {{form.marks}}
+            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<br><br><br>
+{% endblock content %}
